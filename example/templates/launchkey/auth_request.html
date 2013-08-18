@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block meta %}
+  <script src="{% static "js/launchkey.js" %}"></script>
+  <script>
+    launchkey.poll({
+      authorized: function() {
+        // User has authenticated. Reloading the page will cause
+        // the page to be redirect to `LOGIN_REDIRECT_URL`.
+        location.reload();
+      },
+      expired: function() {
+        // User has not authenticated. Reloading the page will cause
+        // the page to be redirected back to `launckey-login`.
+        location.reload();
+      }
+    });
+  </script>
+  <!-- Fallback for those with JS disabled -->
+  <noscript><meta http-equiv="refresh" content="5"></noscript>
+{% endblock %}
+
+{% block content %}
+  <h1>Waiting for Launch...</h1>
+{% endblock %}
